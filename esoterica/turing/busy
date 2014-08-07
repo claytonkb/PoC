@@ -1,0 +1,9 @@
+_ [_] _
+%%
+[A] _ 1 R B
+A 1 1 L C
+B _ 1 L A
+B 1 1 R B
+C _ 1 L B
+C 1 1 N HALT
+HALT$

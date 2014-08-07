@@ -1,0 +1,14 @@
+_ [_] _
+%%
+[A] _ 1 R B
+A 1 _ L C
+B _ 1 L A
+B 1 _ R A
+C _ _ L D
+C 1 1 R Z
+D _ 1 R E
+D 1 1 L D
+E _ _ L F
+E 1 _ L E
+F _ 1 R F
+F 1 _ L B

@@ -1,0 +1,113 @@
+NOTE: This spec is not implemented by muxcomp.pl which is just a quick-
+and-dirty PoC script
+
+#####Lexicals
+
+Identifiers [A-Za-z_][A-Za-z_0-9]*
+Numbers are default hex
+Decimal notation?
+Comments
+
+#####Variables
+
+An identifier in null-context is interpreted as a variable
+A variable is just an alias for a word address
+    The assembler automatically allocates one word for auto-declared variables
+Larger variables need to be declared
+
+    var myvar 16
+
+... declares a variable of size 16 words
+
+#####Labels
+
+A identifier with a colon suffixed to it is interpreted as a label
+
+    label:
+
+#####Subroutine calls
+
+An identifier followed by parentheses is interepreted as a subroutine call
+
+    MUX2_1(ident1, ident2, select)
+
+#####Raw words
+
+By default, a number in null context is interpreted as a word to be 
+encoded at the current position (which increments by one, by default)
+
+#####Segments
+
+A segment is defined by the segment keyword:
+
+    segment myseg 75
+    end    
+
+The number following the the segment declaration indicates the size
+(in words) of the segment
+
+#####Assembler arithmetic
+
+TBD
+
+#####Defines
+
+define ROL1(OP, DEST)
+
+fffffffe00000001
+fffe0001fffe0001
+fe01fe01fe01fe01
+e1e1e1e1e1e1e1e1
+9999999999999999
+5555555555555555
+OP
+DEST
+
+end
+
+Definitions can be nested but any nested definitions must have already
+been defined further up in the file or in an included library (no 
+circular definitions)
+
+#####Org statements
+
+org is indicated with brackets, addressing is 64-bit:
+
+[0]
+0000000000000020
+
+#####Including files
+
+include myfile.mux
+
+For now, there is no scoping, just one big flat global namespace
+Yes, this is bad but that's assuming someone will actually use this!
+
+#####Pseudo-instructions
+#Pseudo-instructions are special additions to the assembler
+
+SLICE[]()
+BOOL[]()
+SHLx, x != 1,2,4,8,16,32
+ROLx, x != 1,2,4,8,16,32
+
+#####Standard opcode library
+
+Just use:
+
+include std.mux
+
+This will give you some of the basics
+
+AND()
+OR()
+NOT()
+XOR()
+NAND2, NAND3, NAND4, NAND5, NAND6
+NOR2,  NOR3,  NOR4,  NOR5,  NOR6
+MUX4_1
+
+ROL1,ROL2,ROL4,ROL8,ROL16,ROL32
+SHL1,SHL2,SHL4,SHL8,SHL16,SHL32
+
+

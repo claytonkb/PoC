@@ -1,0 +1,46 @@
+64-bit Kogge-Stone algorithm
+
+ord64 A
+ord64 B
+ord64 P
+
+P0 = XOR2(A,B)
+G0 = AND2(A,B)
+P0_shift = SHL1_special(P0) (This is a special kind of shift operation that leaves LSBs unchanged)
+G0_shift = SHL1_special(G1)
+
+P1 = AND2(P0,P0_shift)
+G1 = BOOL_OR_AND_S_T_Q(Q=G0,S=P0,T=G0_shift)
+P1_shift = SHL2_special(P1)
+G1_shift = SHL2_special(G1)
+
+P2 = AND2(P1,P1_shift)
+G2 = BOOL_OR_AND_S_T_Q(Q=G1,S=P1,T=G1_shift)
+P2_shift = SHL4_special(P2)
+G2_shift = SHL4_special(G2)
+
+P3 = AND2(P2,P2_shift)
+G3 = BOOL_OR_AND_S_T_Q(Q=G2,S=P2,T=G2_shift)
+P3_shift = SHL8_special(P3)
+G3_shift = SHL8_special(G3)
+
+P4 = AND2(P3,P3_shift)
+G4 = BOOL_OR_AND_S_T_Q(Q=G3,S=P3,T=G3_shift)
+P4_shift = SHL16_special(P4)
+G4_shift = SHL16_special(G4)
+
+P5 = AND2(P4,P4_shift)
+G5 = BOOL_OR_AND_S_T_Q(Q=G4,S=P4,T=G4_shift)
+P5_shift = SHL32_special(P5)
+G5_shift = SHL32_special(G5)
+
+//P6 = AND2(P5,P5_shift)
+G6 = BOOL_OR_AND_S_T_Q(Q=G5,S=P5,T=G5_shift)
+
+C = SHL1(G6)
+
+S = XOR2(P0,C)
+
+28 operations
+
+
