@@ -12,6 +12,9 @@
 # vars - no undeclared variables
 #turn them off carefully with "no strict"
 
+# Pattern match capture
+($type) = ($ar_byte =~ /(.)$/);
+
 #you can store data directly in the <DATA> filehandle
 @test = <DATA>;
 print $_ foreach (@test); #you can reverse for's and foreach's
@@ -332,8 +335,15 @@ NO_INTERPOLATION
 #- Carp - Better warn and die
 #- Cwd - Current working directory
 #- Benchmark - Timing code
+
 #- File::Basename - Break up filenames
+($name,$path,$suffix) = fileparse($fullname,@suffixlist);
+$name = fileparse($fullname,@suffixlist);
+$basename = basename($fullname,@suffixlist);
+$dirname  = dirname($fullname);
+
 #- Data::Dumper - Dump data to text
+print Dumper($myref);
 
 #Useful Non-Standard Modules
 #- Template - Insert data in boilerplate text
